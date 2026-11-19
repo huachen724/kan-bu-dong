@@ -1,0 +1,98 @@
+.entry-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.entry-hz-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.entry-hz {
+  font-size: 3.4rem;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.entry-compact .entry-hz {
+  font-size: 2.6rem;
+}
+
+.entry-alt {
+  font-size: 1.3rem;
+  color: var(--text-3);
+}
+
+.entry-py {
+  font-size: 1.15rem;
+}
+
+.entry-defs {
+  margin: 12px 0 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+.entry-defs li::marker {
+  color: var(--text-3);
+  font-size: 0.85em;
+}
+
+.audio-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 999px;
+  background: var(--accent-bg);
+  color: var(--accent);
+  flex-shrink: 0;
+  font-weight: 650;
+  transition: transform 0.1s;
+}
+
+.audio-btn:active,
+.audio-btn[data-playing] {
+  transform: scale(0.94);
+  background: var(--accent);
+  color: var(--accent-text);
+}
+
+.char-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--surface);
+  text-decoration: none;
+  color: inherit;
+}
+
+.char-row-hz {
+  font-size: 2rem;
+  line-height: 1.1;
+  min-width: 2.2rem;
+  text-align: center;
+}
+
+.example {
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--surface);
+}
+
+.example-zh {
+  font-size: 1.2rem;
+}
+
+.family-chip {
+  min-height: 40px;
+  font-size: 1rem;
+}

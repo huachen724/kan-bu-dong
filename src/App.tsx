@@ -1,137 +1,146 @@
-import { useState } from 'react';
-import type { FlashCard, CardOutcome } from './types';
-import type { StudySet } from './lib/storage';
-import { loadSets, createSet, updateSet, deleteSet } from './lib/storage';
+import { useLiveQuery } from 'dexie-react-hooks';
+import type { FlashCard } from './types';
+import type { QuizMode } from './lib/db';
+import { addCards, createDeck, flashcardToNewCard } from './lib/cards';
+import { dueCounts } from './lib/srs';
+import { goBack, navigate, useRoute } from './lib/router';
+import { dismiss, useToasts } from './lib/toast';
+import { useSettings } from './lib/settings';
+import { IconBook, IconCards, IconHome, IconPen, IconSearch } from './components/Icons';
 import { SetsView } from './components/SetsView';
 import { UploadView } from './components/UploadView';
 import { SetDetailView } from './components/SetDetailView';
 import { EditView } from './components/EditView';
-import { DeckView } from './components/DeckView';
-import { ResultsView } from './components/ResultsView';
+import { HomeView } from './views/HomeView';
+import { DictionaryView } from './views/DictionaryView';
+import { WordView } from './views/WordView';
+import { ReviewView } from './views/ReviewView';
+import { CramView } from './views/CramView';
+import { WritePracticeView, WriteView } from './views/WriteView';
+import { ReadView, ReaderView } from './views/ReadView';
+import { PackView, PacksView } from './views/PacksView';
+import { RadicalsView } from './views/RadicalsView';
+import { FamilyTalkView } from './views/FamilyTalkView';
+import { SpeakView } from './views/SpeakView';
+import { SettingsView } from './views/SettingsView';
+import type { PadMode } from './components/WritingPad';
 import './App.css';
 
-function shuffle<T>(arr: T[]): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
+type Tab = 'home' | 'dict' | 'cards' | 'write' | 'read';
+
+const TABS: { id: Tab; label: string; href: string; Icon: typeof IconHome }[] = [
+  { id: 'home', label: 'Home', href: '#/', Icon: IconHome },
+  { id: 'dict', label: 'Dictionary', href: '#/dict', Icon: IconSearch },
+  { id: 'cards', label: 'Flashcards', href: '#/cards', Icon: IconCards },
+  { id: 'write', label: 'Write', href: '#/write', Icon: IconPen },
+  { id: 'read', label: 'Read', href: '#/read', Icon: IconBook },
+];
+
+async function handleCreate(name: string, cards: FlashCard[]) {
+  const deck = await createDeck(name, { kind: 'custom' });
+  await addCards(
+    cards.map((c) => flashcardToNewCard(c, 'import')),
+    deck.id,
+  );
+  navigate(`deck/${deck.id}`, { replace: true });
 }
 
-type View =
-  | { mode: 'sets' }
-  | { mode: 'create' }
-  | { mode: 'detail'; setId: string }
-  | { mode: 'edit'; setId: string }
-  | { mode: 'deck'; setId: string; cards: FlashCard[]; originalCards: FlashCard[] }
-  | { mode: 'results'; setId: string; cards: FlashCard[]; originalCards: FlashCard[]; outcomes: CardOutcome[] };
+function useScreen(): { tab: Tab; fullscreen?: boolean; el: React.ReactNode } {
+  const { path, query, raw } = useRoute();
+  const [a = '', b, c] = path;
+  switch (a) {
+    case '':
+      return { tab: 'home', el: <HomeView /> };
+    case 'dict':
+      return { tab: 'dict', el: <DictionaryView /> };
+    case 'word':
+      return { tab: 'dict', el: <WordView key={raw} word={b ?? ''} pinyin={query.get('p') ?? undefined} /> };
+    case 'speak':
+      return { tab: 'dict', el: <SpeakView /> };
+    case 'cards':
+      if (b === 'new') return { tab: 'cards', el: <UploadView onSave={(n, cs) => void handleCreate(n, cs)} onBack={() => goBack('cards')} /> };
+      return { tab: 'cards', el: <SetsView /> };
+    case 'deck':
+      if (c === 'edit') return { tab: 'cards', el: <EditView deckId={b!} onDone={() => goBack(`deck/${b}`)} /> };
+      return { tab: 'cards', el: <SetDetailView key={b} deckId={b!} /> };
+    case 'cram':
+      return { tab: 'cards', fullscreen: true, el: <CramView deckId={b!} /> };
+    case 'review':
+      return {
+        tab: 'cards',
+        fullscreen: true,
+        el: (
+          <ReviewView
+            key={raw}
+            deckId={query.get('deck') ?? undefined}
+            mode={(query.get('mode') as QuizMode | null) ?? undefined}
+            extraNew={query.get('new') ? Number(query.get('new')) : undefined}
+          />
+        ),
+      };
+    case 'write':
+      if (b) return { tab: 'write', el: <WritePracticeView key={raw} word={b} initialMode={(query.get('mode') as PadMode | null) ?? undefined} /> };
+      return { tab: 'write', el: <WriteView /> };
+    case 'read':
+      if (b) return { tab: 'read', el: <ReaderView key={b} id={b} /> };
+      return { tab: 'read', el: <ReadView /> };
+    case 'packs':
+      return { tab: 'home', el: <PacksView /> };
+    case 'pack':
+      return { tab: 'home', el: <PackView key={b} id={b!} /> };
+    case 'radicals':
+      return { tab: 'home', el: <RadicalsView /> };
+    case 'family':
+      return { tab: 'home', el: <FamilyTalkView /> };
+    case 'settings':
+      return { tab: 'home', el: <SettingsView /> };
+    default:
+      return { tab: 'home', el: <HomeView /> };
+  }
+}
 
 export default function App() {
-  const [view, setView] = useState<View>({ mode: 'sets' });
-  const [sets, setSets] = useState<StudySet[]>(loadSets);
-
-  function refresh() {
-    setSets(loadSets());
-  }
-
-  function handleCreate(name: string, cards: FlashCard[]) {
-    createSet(name, cards);
-    refresh();
-    setView({ mode: 'sets' });
-  }
-
-  function handleUpdate(updated: StudySet) {
-    updateSet(updated);
-    refresh();
-    setView({ mode: 'detail', setId: updated.id });
-  }
-
-  function handleDelete(id: string) {
-    deleteSet(id);
-    refresh();
-    setView({ mode: 'sets' });
-  }
-
-  const currentSet =
-    view.mode !== 'sets' && view.mode !== 'create'
-      ? (sets.find((s) => s.id === view.setId) ?? null)
-      : null;
+  const screen = useScreen();
+  useSettings();
+  const counts = useLiveQuery(() => dueCounts(), []);
+  const toasts = useToasts();
+  const badge = counts ? counts.due + counts.fresh : 0;
 
   return (
-    <div className="app">
-      {view.mode === 'sets' && (
-        <SetsView
-          sets={sets}
-          onNew={() => setView({ mode: 'create' })}
-          onOpen={(id) => setView({ mode: 'detail', setId: id })}
-        />
+    <div className={`app ${screen.fullscreen ? 'fullscreen' : ''}`}>
+      <main className="app-main">{screen.el}</main>
+
+      {!screen.fullscreen && (
+        <nav className="bottom-nav" aria-label="Main">
+          <div className="bottom-nav-inner">
+            {TABS.map(({ id, label, href, Icon }) => (
+              <a key={id} href={href} className={`nav-tab ${screen.tab === id ? 'active' : ''}`} aria-current={screen.tab === id ? 'page' : undefined}>
+                <Icon />
+                <span>{label}</span>
+                {id === 'cards' && badge > 0 && <span className="nav-badge">{badge > 99 ? '99+' : badge}</span>}
+              </a>
+            ))}
+          </div>
+        </nav>
       )}
 
-      {view.mode === 'create' && (
-        <UploadView
-          onSave={handleCreate}
-          onBack={() => setView({ mode: 'sets' })}
-        />
-      )}
-
-      {view.mode === 'detail' && currentSet && (
-        <SetDetailView
-          set={currentSet}
-          onStudy={() =>
-            setView({
-              mode: 'deck',
-              setId: currentSet.id,
-              cards: shuffle(currentSet.cards),
-              originalCards: currentSet.cards,
-            })
-          }
-          onEdit={() => setView({ mode: 'edit', setId: currentSet.id })}
-          onDelete={() => handleDelete(currentSet.id)}
-          onBack={() => setView({ mode: 'sets' })}
-        />
-      )}
-
-      {view.mode === 'edit' && currentSet && (
-        <EditView
-          set={currentSet}
-          onSave={handleUpdate}
-          onBack={() => setView({ mode: 'detail', setId: currentSet.id })}
-        />
-      )}
-
-      {view.mode === 'deck' && (
-        <DeckView
-          cards={view.cards}
-          onDone={(outcomes) =>
-            setView({
-              mode: 'results',
-              setId: view.setId,
-              cards: view.cards,
-              originalCards: view.originalCards,
-              outcomes,
-            })
-          }
-          onShuffle={() => setView({ ...view, cards: shuffle(view.originalCards) })}
-          onHome={() => setView({ mode: 'detail', setId: view.setId })}
-        />
-      )}
-
-      {view.mode === 'results' && (
-        <ResultsView
-          cards={view.cards}
-          outcomes={view.outcomes}
-          onRedoMissed={(missed) =>
-            setView({
-              mode: 'deck',
-              setId: view.setId,
-              cards: shuffle(missed),
-              originalCards: missed,
-            })
-          }
-          onBack={() => setView({ mode: 'detail', setId: view.setId })}
-        />
-      )}
+      <div className="toasts" aria-live="polite" style={screen.fullscreen ? { bottom: 'calc(96px + env(safe-area-inset-bottom))' } : undefined}>
+        {toasts.map((t) => (
+          <div key={t.id} className="toast">
+            <span>{t.message}</span>
+            {t.action && (
+              <button
+                onClick={() => {
+                  t.action!.run();
+                  dismiss(t.id);
+                }}
+              >
+                {t.action.label}
+              </button>
+            )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

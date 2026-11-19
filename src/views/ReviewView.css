@@ -1,0 +1,286 @@
+.rv2 {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding: env(safe-area-inset-top) 0 0;
+}
+
+.rv2-loading {
+  padding: 40vh 16px 0;
+  text-align: center;
+  color: var(--text-2);
+}
+
+.rv2-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px 4px 8px;
+}
+
+.rv2-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-3);
+  margin-top: 6px;
+  font-variant-numeric: tabular-nums;
+}
+
+.rv2-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 16px 0;
+}
+
+.rv2-tags {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.rv2-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 12px 0;
+}
+
+.mode-writing .rv2-body {
+  justify-content: flex-start;
+}
+
+.rv2-front {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+}
+
+.rv2-big {
+  font-size: clamp(4rem, 22vw, 7.5rem);
+  line-height: 1.1;
+  text-align: center;
+  word-break: keep-all;
+}
+
+.rv2-meaning {
+  font-size: 1.6rem;
+  font-weight: 650;
+  text-align: center;
+  line-height: 1.35;
+  max-width: 28ch;
+}
+
+.rv2-listen {
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-lg);
+}
+
+.rv2-listen svg {
+  width: 48px;
+  height: 48px;
+}
+
+.rv2-listen:active {
+  transform: scale(0.95);
+}
+
+.rv2-py-prompt {
+  font-size: 2rem;
+}
+
+.rv2-choices {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.rv2-choice {
+  min-height: 84px;
+  border-radius: 16px;
+  background: var(--surface-raised);
+  border: 2px solid var(--border);
+  font-size: 2rem;
+  transition: transform 0.1s;
+}
+
+.rv2-choice:active {
+  transform: scale(0.97);
+}
+
+.rv2-choice.right {
+  border-color: var(--green);
+  background: var(--green-bg);
+  color: var(--green);
+}
+
+.rv2-choice.wrong {
+  border-color: var(--red);
+  background: var(--red-bg);
+  color: var(--red);
+}
+
+.rv2-choice:disabled:not(.right):not(.wrong) {
+  opacity: 0.5;
+}
+
+.rv2-write {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.rv2-write-prompt {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: var(--surface);
+}
+
+.rv2-write-py {
+  font-size: 1.35rem;
+}
+
+.rv2-answer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 16px;
+  border-radius: 18px;
+  background: var(--surface);
+  text-align: center;
+  animation: slide-up 0.2s ease;
+}
+
+.rv2-ans-hz {
+  font-size: 3.6rem;
+  line-height: 1.15;
+}
+
+.rv2-ans-py {
+  font-size: 1.5rem;
+}
+
+.rv2-ans-def {
+  font-size: 1.05rem;
+  line-height: 1.45;
+  color: var(--text-2);
+  max-width: 34ch;
+}
+
+.rv2-answer .stroke-order {
+  align-items: center;
+}
+
+.rv2-dict-link {
+  color: var(--accent);
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.rv2-foot {
+  position: sticky;
+  bottom: 0;
+  padding: 12px 0 calc(12px + env(safe-area-inset-bottom));
+  background: linear-gradient(transparent, var(--bg) 30%);
+}
+
+.grade-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.grade-btn {
+  min-height: 62px;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  border: 2px solid transparent;
+  transition: transform 0.1s;
+}
+
+.grade-btn:active {
+  transform: scale(0.96);
+}
+
+.grade-label {
+  font-weight: 750;
+  font-size: 0.95rem;
+}
+
+.grade-ivl {
+  font-size: 0.72rem;
+  opacity: 0.75;
+  font-variant-numeric: tabular-nums;
+}
+
+.g-again { background: var(--red-bg); color: var(--red); }
+.g-hard { background: var(--amber-bg); color: var(--amber); }
+.g-good { background: var(--green-bg); color: var(--green); }
+.g-easy { background: var(--blue-bg); color: var(--blue); }
+
+.grade-btn.suggested {
+  border-color: currentColor;
+  box-shadow: 0 0 0 3px color-mix(in srgb, currentColor 18%, transparent);
+}
+
+.rv2-done {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 24px 16px calc(24px + env(safe-area-inset-bottom));
+  text-align: center;
+}
+
+.rv2-done h2 {
+  font-size: 1.6rem;
+  font-weight: 800;
+}
+
+.rv2-done-emoji {
+  font-size: 3.4rem;
+}
+
+.rv2-stat {
+  font-size: 1.6rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}

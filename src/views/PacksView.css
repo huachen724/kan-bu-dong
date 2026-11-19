@@ -1,0 +1,156 @@
+.packs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+}
+
+.pack-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-height: 168px;
+  padding: 14px;
+  border-radius: 18px;
+  text-decoration: none;
+  color: var(--text);
+  background: linear-gradient(160deg, color-mix(in srgb, var(--tint) 16%, var(--surface-raised)), var(--surface-raised) 70%);
+  border: 1px solid color-mix(in srgb, var(--tint) 30%, var(--border));
+}
+
+.pack-step {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--text-3);
+}
+
+.pack-icon {
+  font-size: 1.8rem;
+}
+
+.pack-zh {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.pack-title {
+  font-size: 0.82rem;
+  font-weight: 650;
+  color: var(--text-2);
+  line-height: 1.25;
+}
+
+.pack-count {
+  color: var(--text-3);
+  margin-bottom: 8px;
+}
+
+.pack-hero {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 16px;
+  border-radius: 18px;
+  background: linear-gradient(160deg, color-mix(in srgb, var(--tint) 18%, var(--surface-raised)), var(--surface-raised));
+  border: 1px solid color-mix(in srgb, var(--tint) 30%, var(--border));
+}
+
+.pack-hero-icon {
+  font-size: 2.8rem;
+}
+
+.pack-hero-zh {
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.tip {
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: var(--amber-bg);
+  color: var(--text);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  border-left: 4px solid var(--amber);
+}
+
+.steps {
+  list-style: none;
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.step {
+  display: flex;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 14px;
+  background: var(--surface);
+}
+
+.step-n {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.step.done .step-n {
+  background: var(--green);
+  border-color: var(--green);
+  color: #fff;
+}
+
+.step-n svg {
+  width: 16px;
+  height: 16px;
+}
+
+.pack-word {
+  border-bottom: 1px solid var(--border);
+}
+
+.pack-word:last-child {
+  border-bottom: none;
+}
+
+.pack-word-main {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  text-align: left;
+  min-height: 64px;
+}
+
+.pack-word-hz {
+  font-size: 1.7rem;
+  font-weight: 600;
+  min-width: 3.2rem;
+}
+
+.pack-word-more {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 14px 14px;
+  animation: fade-in 0.15s ease;
+}
+
+.pack-word-more .example {
+  font-size: 1.15rem;
+}

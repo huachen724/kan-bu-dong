@@ -1,0 +1,140 @@
+/* Radical trainer */
+.radical-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
+  gap: 8px;
+}
+
+.radical-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 10px 4px;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  min-height: 84px;
+}
+
+.radical-tile.known {
+  border-color: var(--green);
+}
+
+.radical-tile.open {
+  grid-column: 1 / -1;
+  align-items: stretch;
+  text-align: left;
+  padding: 12px 14px;
+  background: var(--surface-raised);
+  box-shadow: var(--shadow);
+}
+
+.radical-tile.open .radical-glyph,
+.radical-tile.open > .tiny {
+  align-self: center;
+}
+
+.radical-glyph {
+  font-size: 2rem;
+  line-height: 1.2;
+}
+
+.radical-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+  cursor: default;
+}
+
+.quiz-glyph {
+  font-size: 5rem;
+  line-height: 1.15;
+}
+
+.quiz-opt {
+  min-height: 64px;
+  border-radius: 14px;
+  border: 2px solid var(--border);
+  background: var(--surface-raised);
+  font-weight: 650;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 6px;
+}
+
+.quiz-opt.right {
+  border-color: var(--green);
+  background: var(--green-bg);
+  color: var(--green);
+}
+
+.quiz-opt.wrong {
+  border-color: var(--red);
+  background: var(--red-bg);
+  color: var(--red);
+}
+
+/* Family talk */
+.phrase-zh {
+  font-size: 1.45rem;
+}
+
+.phrase-en {
+  color: var(--text-2);
+  font-size: 0.95rem;
+}
+
+/* Speak */
+.speak-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 0 20px;
+}
+
+.speak-mic {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-lg);
+  transition: transform 0.15s;
+}
+
+.speak-mic svg {
+  width: 48px;
+  height: 48px;
+}
+
+.speak-mic.on {
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 45%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 0 18px color-mix(in srgb, var(--accent) 0%, transparent);
+  }
+}
+
+.speak-text {
+  font-size: 1.7rem;
+}
+
+.speak-word-hz {
+  font-size: 1.6rem;
+  min-width: 3rem;
+}

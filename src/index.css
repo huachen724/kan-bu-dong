@@ -1,3 +1,5 @@
+/* Design tokens — the original flashcard tokens (--bg, --surface, --red …) are kept so the
+   original components render unchanged; new tokens extend them. */
 :root {
   color-scheme: light dark;
 
@@ -12,24 +14,91 @@
   --red-bg: #fef2f2;
   --green: #15803d;
   --green-bg: #f0fdf4;
+  --amber: #b45309;
+  --amber-bg: #fffbeb;
+  --blue: #1d4ed8;
+  --blue-bg: #eff6ff;
   --radius: 14px;
   --radius-sm: 8px;
+
+  --accent: var(--red);
+  --accent-bg: var(--red-bg);
+  --accent-text: #ffffff;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.18);
+  --nav-h: 64px;
+  --grid-line: rgba(185, 28, 28, 0.22);
+
+  /* Pleco-style tone colors */
+  --t1: #dc2626;
+  --t2: #d97706;
+  --t3: #16a34a;
+  --t4: #2563eb;
+  --t5: #78716c;
+
+  --font-ui: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  --font-sc: 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans SC', 'Source Han Sans SC', 'Microsoft YaHei', sans-serif;
+  --font-tc: 'PingFang TC', 'Noto Sans TC', 'Source Han Sans TC', 'Microsoft JhengHei', sans-serif;
+  --font-kai: 'Kaiti SC', 'STKaiti', 'KaiTi', 'BiauKai', 'AR PL UKai CN', var(--font-sc);
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme='light']) {
     --bg: #0f0f0e;
     --surface: #1c1b1a;
     --surface-raised: #252421;
-    --border: #302e2b;
+    --border: #34312d;
     --text: #f0ede8;
     --text-2: #b8b4ae;
-    --text-3: #6b6862;
+    --text-3: #77736c;
     --red: #ef4444;
     --red-bg: #2d1111;
     --green: #4ade80;
     --green-bg: #0d2818;
+    --amber: #fbbf24;
+    --amber-bg: #2a1f06;
+    --blue: #60a5fa;
+    --blue-bg: #0c1a33;
+    --accent-text: #1a0505;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 16px rgba(0, 0, 0, 0.3);
+    --grid-line: rgba(239, 68, 68, 0.25);
+    --t1: #f87171;
+    --t2: #fbbf24;
+    --t3: #4ade80;
+    --t4: #60a5fa;
+    --t5: #a8a29e;
   }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #0f0f0e;
+  --surface: #1c1b1a;
+  --surface-raised: #252421;
+  --border: #34312d;
+  --text: #f0ede8;
+  --text-2: #b8b4ae;
+  --text-3: #77736c;
+  --red: #ef4444;
+  --red-bg: #2d1111;
+  --green: #4ade80;
+  --green-bg: #0d2818;
+  --amber: #fbbf24;
+  --amber-bg: #2a1f06;
+  --blue: #60a5fa;
+  --blue-bg: #0c1a33;
+  --accent-text: #1a0505;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 16px rgba(0, 0, 0, 0.3);
+  --grid-line: rgba(239, 68, 68, 0.25);
+  --t1: #f87171;
+  --t2: #fbbf24;
+  --t3: #4ade80;
+  --t4: #60a5fa;
+  --t5: #a8a29e;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
 }
 
 *,
@@ -43,16 +112,17 @@
 html,
 body,
 #root {
-  height: 100%;
+  min-height: 100%;
   min-height: 100dvh;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--font-ui);
   background: var(--bg);
   color: var(--text);
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
+  overscroll-behavior-y: none;
 }
 
 button {
@@ -60,10 +130,28 @@ button {
   font-family: inherit;
   border: none;
   background: none;
+  color: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: inherit;
   -webkit-tap-highlight-color: transparent;
 }
 
 textarea,
-input {
+input,
+select {
   font-family: inherit;
+  font-size: 16px; /* prevents iOS zoom-on-focus */
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+body.no-scroll {
+  overflow: hidden;
+  touch-action: none;
 }

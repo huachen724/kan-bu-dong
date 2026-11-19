@@ -121,3 +121,24 @@
   font-weight: 700;
   color: #fff;
 }
+
+/* SRS additions */
+.sdv {
+  min-height: auto;
+}
+
+.sdv-btn:disabled {
+  opacity: 0.45;
+}
+
+.sdv-card-hz {
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+.sdv-card-def {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-top: 2px;
+}

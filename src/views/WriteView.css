@@ -1,0 +1,135 @@
+.write-cta {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px;
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: var(--accent-text);
+  text-align: left;
+  font-size: 1.3rem;
+  box-shadow: var(--shadow);
+}
+
+.write-cta:disabled {
+  background: var(--surface);
+  color: var(--text-2);
+  box-shadow: none;
+}
+
+.write-cta-icon {
+  font-size: 1.8rem;
+}
+
+.write-cta-title {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.write-cta-sub {
+  display: block;
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+.write-row-hz {
+  font-size: 1.6rem;
+  min-width: 3rem;
+}
+
+.write-chip {
+  font-size: 1.15rem;
+  min-height: 44px;
+}
+
+.attempts {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
+  gap: 8px;
+}
+
+.attempt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 6px;
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--text-2);
+}
+
+.attempt.pass {
+  border-color: var(--green);
+}
+
+.attempt.fail {
+  border-color: var(--red);
+}
+
+.attempt img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.attempt-hz {
+  font-size: 2.2rem;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+}
+
+.write-practice {
+  min-height: 100dvh;
+}
+
+.wpv-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: var(--surface);
+}
+
+.wpv-hz {
+  font-size: 2.2rem;
+}
+
+.wpv-py {
+  font-size: 1.2rem;
+}
+
+.wpv-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  border-radius: 18px;
+  background: var(--surface);
+  animation: slide-up 0.2s ease;
+}
+
+.wpv-result-head {
+  font-size: 1.2rem;
+  font-weight: 750;
+}
+
+.wpv-img {
+  height: 96px;
+  border-radius: 8px;
+  border: 1px solid var(--grid-line);
+  background: #fff;
+}
+
+.wpv-result .stroke-order {
+  align-items: center;
+}

@@ -27,12 +27,19 @@
 }
 
 .cs-canvas {
-  /* hanzi-writer injects SVG here */
+  /* hanzi-writer injects SVG here; 田字格 guide lines behind it */
   line-height: 0;
+  border: 1px solid var(--grid-line);
+  border-radius: 6px;
+  background:
+    linear-gradient(var(--grid-line), var(--grid-line)) center / 100% 1px no-repeat,
+    linear-gradient(var(--grid-line), var(--grid-line)) center / 1px 100% no-repeat,
+    var(--surface-raised);
 }
 
 .cs-play {
-  width: 80px;
+  width: 100%;
+  min-width: 56px;
   padding: 4px 0;
   background: var(--surface-raised);
   border: 1px solid var(--border);

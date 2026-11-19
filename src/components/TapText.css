@@ -1,0 +1,28 @@
+.tap-text {
+  line-height: 2.1;
+  word-break: keep-all;
+}
+
+.tap-word {
+  font: inherit;
+  color: inherit;
+  padding: 0 1px;
+  border-radius: 4px;
+  line-height: inherit;
+  transition: background 0.12s;
+}
+
+.tap-word:hover,
+.tap-word:active {
+  background: var(--accent-bg);
+  color: var(--accent);
+}
+
+.tap-word ruby {
+  ruby-position: over;
+}
+
+.tap-word rt {
+  font-size: 0.48em;
+  line-height: 1;
+}

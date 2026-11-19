@@ -1,0 +1,225 @@
+.read-icon {
+  font-size: 1.6rem;
+  width: 40px;
+  text-align: center;
+}
+
+.read-title-zh {
+  font-size: 1.1rem;
+}
+
+.reader-head {
+  margin-bottom: 12px;
+}
+
+.reader-title {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.reader-toggle {
+  position: sticky;
+  top: calc(56px + env(safe-area-inset-top));
+  z-index: 15;
+  margin-bottom: 16px;
+}
+
+.reader-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.reader-en {
+  font-family: var(--font-ui);
+  font-size: 0.88rem;
+  color: var(--text-2);
+  margin-top: 2px;
+  line-height: 1.4;
+}
+
+.line-tools {
+  min-width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  font-weight: 750;
+  color: var(--text-3);
+  background: var(--surface);
+  flex-shrink: 0;
+}
+
+/* dialogue / story */
+.line {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.line-who {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent);
+  min-width: 3em;
+  padding-top: 0.55rem;
+}
+
+.line-zh {
+  font-size: 1.35rem;
+}
+
+.line-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.kind-story .line-zh {
+  font-size: 1.3rem;
+}
+
+/* WeChat-style chat */
+.kind-chat {
+  background: var(--surface);
+  border-radius: 18px;
+  padding: 14px 10px;
+}
+
+.chat-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.chat-row.me {
+  flex-direction: row-reverse;
+}
+
+.chat-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: var(--accent-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.chat-col {
+  display: flex;
+  flex-direction: column;
+  max-width: 76%;
+  gap: 2px;
+}
+
+.chat-name {
+  font-size: 0.72rem;
+  color: var(--text-3);
+  padding-left: 4px;
+}
+
+.chat-bubble {
+  background: var(--surface-raised);
+  border-radius: 4px 14px 14px 14px;
+  padding: 6px 12px;
+  font-size: 1.2rem;
+  box-shadow: var(--shadow);
+}
+
+.chat-row.me .chat-bubble {
+  background: #95ec69;
+  color: #111;
+  border-radius: 14px 4px 14px 14px;
+}
+
+.chat-row.me .chat-bubble rt,
+.chat-row.me .chat-bubble .reader-en {
+  color: #2c4a1e;
+}
+
+.chat-row .line-tools {
+  align-self: center;
+  background: transparent;
+}
+
+/* menu */
+.kind-menu {
+  border: 2px solid var(--border);
+  border-radius: 18px;
+  padding: 10px 16px;
+  background: var(--surface-raised);
+}
+
+.menu-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 6px 0;
+  border-bottom: 1px dashed var(--border);
+}
+
+.menu-row:last-child {
+  border-bottom: none;
+}
+
+.menu-zh {
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+.menu-price {
+  font-weight: 750;
+  color: var(--accent);
+  padding-top: 0.6rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* signs */
+.kind-sign {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+}
+
+.sign {
+  border-radius: 10px;
+  background: #0f5132;
+  color: #fff;
+  padding: 10px 12px;
+  text-align: center;
+  border: 3px solid #fff;
+  outline: 2px solid #0f5132;
+}
+
+.sign:nth-child(3n + 2) {
+  background: #1e3a8a;
+  outline-color: #1e3a8a;
+}
+
+.sign:nth-child(3n) {
+  background: #9a1c1c;
+  outline-color: #9a1c1c;
+}
+
+.sign-zh {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.sign rt,
+.sign .reader-en {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.sign .tap-word:hover,
+.sign .tap-word:active {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}

@@ -90,7 +90,7 @@ export function DeckView({ cards, onDone, onShuffle, onHome }: Props) {
                     onHome();
                   }}
                 >
-                  🏠 Back to upload
+                  🏠 Back to deck
                 </button>
               </div>
             )}
@@ -105,7 +105,9 @@ export function DeckView({ cards, onDone, onShuffle, onHome }: Props) {
           <span className="dv-label">Pinyin / Meaning</span>
           <p className="dv-question-text">{card.question}</p>
           {!revealed && (
-            <p className="dv-write-hint">Write the character(s) on paper, then reveal</p>
+            <p className="dv-write-hint">
+              Quick run-through (no scheduling). Write it in your head or on paper, then reveal — use Study → Writing for the on-screen pad.
+            </p>
           )}
         </div>
 
