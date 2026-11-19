@@ -1,4 +1,4 @@
--- 汉字卡 — Supabase schema (free tier). Run in the Supabase SQL editor.
+-- 看不懂 (kan-bu-dong) — Supabase schema (free tier). Run in the Supabase SQL editor.
 -- The app is local-first (IndexedDB via Dexie); these tables mirror the local tables for sync.
 -- Every user table is protected by row-level security: users only ever see their own rows.
 

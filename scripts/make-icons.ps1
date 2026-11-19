@@ -31,14 +31,14 @@ function New-Icon([int]$size, [string]$name, [double]$inset, [bool]$rounded) {
   $g.DrawRectangle($pen, [float]$pad, [float]$pad, [float]($size - 2 * $pad), [float]($size - 2 * $pad))
   $g.DrawLine($pen, [float]($size / 2), [float]$pad, [float]($size / 2), [float]($size - $pad))
   $g.DrawLine($pen, [float]$pad, [float]($size / 2), [float]($size - $pad), [float]($size / 2))
-  # 字 in a CJK font
+  # 看 (from 看不懂) in a CJK font
   $fontName = 'Microsoft YaHei'
   $font = New-Object System.Drawing.Font $fontName, ([float](($size - 2 * $pad) * 0.62)), ([System.Drawing.FontStyle]::Bold), ([System.Drawing.GraphicsUnit]::Pixel)
   $fmt = New-Object System.Drawing.StringFormat
   $fmt.Alignment = 'Center'
   $fmt.LineAlignment = 'Center'
   $rect = New-Object System.Drawing.RectangleF 0, ([float]($size * 0.02)), $size, $size
-  $g.DrawString([string][char]0x5B57, $font, [System.Drawing.Brushes]::White, $rect, $fmt)
+  $g.DrawString([string][char]0x770B, $font, [System.Drawing.Brushes]::White, $rect, $fmt)
   $bmp.Save((Join-Path $out $name), [System.Drawing.Imaging.ImageFormat]::Png)
   $g.Dispose(); $bmp.Dispose()
 }
