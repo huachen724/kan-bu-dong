@@ -56,7 +56,7 @@ async function fetchSource(name) {
   if (!REFRESH && fs.existsSync(file) && fs.statSync(file).size > 1000) return fs.readFileSync(file);
   fs.mkdirSync(CACHE, { recursive: true });
   log(`downloading ${name} …`);
-  const res = await fetch(url, { headers: { 'User-Agent': 'chinese-flashcards-data-script/1.0' } });
+  const res = await fetch(url, { headers: { 'User-Agent': 'kan-bu-dong-data-script/1.0' } });
   if (!res.ok) throw new Error(`${name}: HTTP ${res.status} for ${url}`);
   const buf = Buffer.from(await res.arrayBuffer());
   fs.writeFileSync(file, buf);

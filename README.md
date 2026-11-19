@@ -23,10 +23,10 @@ It grew out of the original `chinese-flashcards` app and keeps all of that app's
 ## Quick start
 
 ```bash
-cd chinese-flashcards
+cd kan-bu-dong
 npm install
 npm run data      # downloads + builds the full offline dictionary (≈10 s after the first download)
-npm run dev       # http://localhost:5173/chinese-flashcards/
+npm run dev       # http://localhost:5173/kan-bu-dong/
 ```
 
 `npm run data` is optional for local development. The app ships with a **starter dictionary** in `src/data/seed/`
@@ -37,7 +37,7 @@ missing, the app stays on the starter set and shows a banner.
 Production build / preview:
 
 ```bash
-npm run build && npm run preview   # http://localhost:4173/chinese-flashcards/
+npm run build && npm run preview   # http://localhost:4173/kan-bu-dong/
 ```
 
 Install it on a phone: open the deployed URL, then **Share → Add to Home Screen** (iOS) or **Install app** (Android Chrome).
@@ -76,7 +76,7 @@ hanzi-writer-data CDN and is cached by the service worker.
 
 1. Create a project at supabase.com (free tier).
 2. In the SQL editor, run [`supabase/schema.sql`](supabase/schema.sql). It creates the tables, row-level security (users only ever see their own rows) and a profile trigger.
-3. **Authentication → URL configuration**: add your site URL (e.g. `https://<you>.github.io/chinese-flashcards/`) and `http://localhost:5173/chinese-flashcards/` to the redirect URLs.
+3. **Authentication → URL configuration**: add your site URL (e.g. `https://<you>.github.io/kan-bu-dong/`) and `http://localhost:5173/kan-bu-dong/` to the redirect URLs.
 4. **Authentication → Providers**: email is on by default. For Google, create an OAuth client in Google Cloud Console (free) and paste its ID and secret.
 5. Copy `.env.example` to `.env.local` and fill in the URL and anon key. For GitHub Pages, add them as repository secrets `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY`.
 
@@ -160,7 +160,7 @@ runs the same on Windows, macOS and Linux CI.
 ## Changelog: original → now
 
 ### Kept from the original `chinese-flashcards`
-- **Stack:** React 18 + TypeScript + Vite 5, GitHub Pages deploy under `/chinese-flashcards/`, plain CSS with design tokens. Every original token name (`--bg`, `--surface`, `--red` …) still works.
+- **Stack:** React 18 + TypeScript + Vite 5, GitHub Pages deploy under `/kan-bu-dong/`, plain CSS with design tokens. Every original token name (`--bg`, `--surface`, `--red` …) still works.
 - **Your existing study sets.** On first launch, every set in `localStorage` (`cf_sets_v1`) is imported into a deck. Each original question text is preserved on the card (`legacyQuestion`) and parsed into pinyin + meaning (`bù rú (wouldn't it be better)` → `bù rú` / `wouldn't it be better`). The old localStorage key is **left untouched** as a backup.
 - **Creating sets by pasting lines or uploading JSON** (`UploadView`), with the same two formats.
 - **The AI prompt helper** (`PromptModal`), unchanged.
