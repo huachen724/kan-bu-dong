@@ -1,4 +1,4 @@
-# 看不懂 · Kàn bù dǒng
+# kan bu dong (看不懂)
 
 A mobile-first, installable, offline-capable PWA for **heritage Mandarin speakers**, people who grew up *speaking*
 Chinese at home but never learned to read or write it. Instead of starting from "hello, my name is…", it bridges

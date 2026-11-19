@@ -10,7 +10,7 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['icons/*.png'],
       manifest: {
-        name: '看不懂 · Kàn bù dǒng',
+        name: 'kan bu dong',
         short_name: '看不懂',
         description: 'Learn to read and write the Mandarin you already speak — dictionary, SRS flashcards, handwriting and reading practice.',
         lang: 'en',
